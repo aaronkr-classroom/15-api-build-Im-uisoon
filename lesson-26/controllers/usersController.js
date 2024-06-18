@@ -81,10 +81,14 @@ module.exports = {
       });
   },
   indexView: (req, res) => {
-    /*
-     * Listing 26.3 (p. 384)
-     * @TODO: userController.js에서 쿼리 매개변수가 존재할 때 JSON으로 응답하기
-     */
+    if (req.query.format == "json") {
+      res.json(res.locals.users);
+    } else {
+      res.render("courses/index", {
+        page: "users",
+        title: "All Users",
+      });
+    }
 
     res.render("users/index", {
       page: "users",
